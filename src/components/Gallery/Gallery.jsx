@@ -1,6 +1,6 @@
 import { Component } from 'react';
 // import axios from 'axios';
-// import css from '../Gallery/gallery.module.css';
+import css from '../Gallery/gallery.module.css';
 
 class Gallery extends Component {
   state = {
@@ -8,7 +8,7 @@ class Gallery extends Component {
   };
   render() {
     return (
-      <div>
+      <div className={css.Gallery}>
         <header class="searchbar">
           <form class="form">
             <button type="submit" class="button">
