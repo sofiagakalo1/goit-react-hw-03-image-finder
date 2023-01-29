@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import css from './searchbar.modules.css';
+import css from './searchbar.module.css';
 
 class Searchbar extends Component {
   state = {
@@ -21,8 +21,8 @@ class Searchbar extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    // this.props.onSubmit({ ...this.state });
-    this.props.onSubmit(this.state);
+    this.props.onSubmit({ ...this.state });
+    // this.props.onSubmit(this.state);
     this.reset();
   };
 
@@ -36,14 +36,14 @@ class Searchbar extends Component {
 
     return (
       <header className={css.searchbar}>
-        <form onSubmit={handleSubmit} className={css.form}>
-          <button type="submit" className={css.button}>
-            <span className={css.button_label}>Search</span>
+        <form onSubmit={handleSubmit} className={css.searchForm}>
+          <button type="submit" className={css.searchForm_button}>
+            <span className={css.searchForm_button_label}>Search</span>
           </button>
           <input
             onChange={handleChande}
             value={search}
-            className={css.input}
+            className={css.searchForm_input}
             required
             name="search"
             type="text"

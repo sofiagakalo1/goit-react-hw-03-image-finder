@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import css from '../Gallery/gallery.module.css';
+
 import Searchbar from '../Searchbar';
 import ImageGallery from '../ImageGallery';
 import Modal from '../Modal';
@@ -13,40 +14,59 @@ class Gallery extends Component {
     loading: false,
     error: null,
     showModal: false,
+    modalImg: '',
+    page: 1,
+    totalPages: 1,
+    perPage: 12,
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { search } = this.state;
-    if (prevState.search !== search) {
-      this.setState({ loading: true });
-      getGalleryItems(search)
-        .then(data => this.setState({ items: data }))
-        .catch(error => this.setState({ error: error.message }))
-        .finally(() => this.setState({ loading: false }));
+    const { search, page } = this.state;
+    if (prevState.search !== search || prevState.page !== page) {
+      this.fetchItems();
     }
   }
 
-  async fetchItems() {}
+  async fetchItems() {
+    try {
+      const { search, page } = this.state;
+      this.setState({ loading: true });
+      const {hits, totalHits} = await getGalleryItems(search, page);
+      this.setState(({ items }) => ({ items: [...items, ...hits] }));
+    } catch (error) {
+      this.setState({ error: error.message });
+    } finally {
+      this.setState({ loading: false });
+    }
+  }
 
-  seachImages = ({ search }) => {
-    this.setState({ search });
+  loadMore = () => {
+    this.setState(({ page }) => ({ page: page + 1 }));
+  };
+
+  seachImage = ({ search }) => {
+    this.setState({ search, items: [], page: 1 });
+  };
+
+  openModal = bigImg => {
+    this.setState({ showModal: true, modalImg: bigImg });
   };
 
   closeModal = () => {
-    this.setState({ showModal: false });
+    this.setState({ showModal: false, modalImg: '' });
   };
 
   render() {
-    const { items, loading, error } = this.state;
-    const { closeModal } = this;
+    const { items, loading, error, modalImg, showModal } = this.state;
+    const { openModal, closeModal, loadMore, seachImage } = this;
     return (
       <div className={css.Gallery}>
-        <Searchbar onSubmit={this.seachImages} />
+        <Searchbar onSubmit={seachImage} />
         {error && <p>{error}</p>}
         {loading && <p>Loading...</p>}
-        {/* <ImageGallery items={items} /> */}
-        <button>Load more</button>
-        <Modal close={closeModal} />
+        <ImageGallery items={items} openModal={openModal} />
+        {Boolean(items.length) && <button onClick={loadMore}>Load more</button>}
+        {showModal && <Modal close={closeModal} bigImg={modalImg} />}
       </div>
     );
   }
