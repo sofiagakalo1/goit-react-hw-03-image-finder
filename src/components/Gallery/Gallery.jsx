@@ -1,6 +1,7 @@
 import { Component } from 'react';
 // import axios from 'axios';
 import css from '../Gallery/gallery.module.css';
+import Searchbar from '../Searchbar';
 
 class Gallery extends Component {
   state = {
@@ -9,20 +10,7 @@ class Gallery extends Component {
   render() {
     return (
       <div className={css.Gallery}>
-        <header class="searchbar">
-          <form class="form">
-            <button type="submit" class="button">
-              <span class="button-label">Search</span>
-            </button>
-            <input
-              class="input"
-              type="text"
-              autocomplete="off"
-              autofocus
-              placeholder="Search images and photos"
-            />
-          </form>
-        </header>
+        <Searchbar />
         <ul class="gallery">
           <li class="gallery-item">
             <img src="" alt="" />
