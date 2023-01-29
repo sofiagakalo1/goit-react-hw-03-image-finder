@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+// import css from '../Gallery/gallery.module.css';
 
 class Gallery extends Component {
   state = {
@@ -22,7 +23,6 @@ class Gallery extends Component {
             />
           </form>
         </header>
-
         <ul class="gallery">
           <li class="gallery-item">
             <img src="" alt="" />
