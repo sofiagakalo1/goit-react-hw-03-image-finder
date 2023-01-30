@@ -18,7 +18,6 @@ class Gallery extends Component {
     showModal: false,
     modalImg: '',
     page: 1,
-    perPage: 12,
     totalHits: null,
   };
 
