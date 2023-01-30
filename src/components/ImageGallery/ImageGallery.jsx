@@ -22,5 +22,12 @@ ImageGallery.defaultProps = {
 
 ImageGallery.propTypes = {
   openModal: PropTypes.func.isRequired,
-  items: PropTypes.array.isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+      tags: PropTypes.string,
+    })
+  ),
 };

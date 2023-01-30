@@ -47,6 +47,9 @@ class Gallery extends Component {
   };
 
   seachImage = ({ search }) => {
+    if (search === this.state.search) {
+      return;
+    }
     this.setState({ search, items: [], page: 1 });
   };
 
