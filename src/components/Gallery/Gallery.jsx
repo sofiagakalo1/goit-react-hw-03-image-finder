@@ -19,7 +19,7 @@ class Gallery extends Component {
     modalImg: '',
     page: 1,
     perPage: 12,
-    totalHits: '',
+    totalHits: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -59,8 +59,17 @@ class Gallery extends Component {
     this.setState({ showModal: false, modalImg: '' });
   };
 
+  noResults = () => {
+    const { totalHits } = this.state;
+    if (totalHits === 0) {
+      return <p>No results. Try something else :(</p>;
+    }
+  };
+
   showLoadMore = () => {
     const { totalHits, loading, items } = this.state;
+    // console.log(totalHits);
+    // console.log(items.length);
     if ((totalHits <= items.length && !loading) || items.length < 1) {
       return Boolean;
     }
@@ -69,7 +78,14 @@ class Gallery extends Component {
   render() {
     const { items, loading, error, modalImg, showModal, totalPages, page } =
       this.state;
-    const { openModal, closeModal, loadMore, seachImage, showLoadMore } = this;
+    const {
+      openModal,
+      closeModal,
+      loadMore,
+      seachImage,
+      showLoadMore,
+      noResults,
+    } = this;
     return (
       <div className={css.Gallery}>
         <Searchbar onSubmit={seachImage} />
@@ -84,6 +100,7 @@ class Gallery extends Component {
             loadMore={loadMore}
           />
         )}
+        {noResults()}
         {!showLoadMore() && (
           <Button loadMore={loadMore} type="button" text="Load more" />
         )}

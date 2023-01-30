@@ -9,13 +9,9 @@ class Searchbar extends Component {
     search: '',
   };
 
-  //search is name of input that can be changed (if we have input with another name,
-  // it will be setstated for it's name in state(state={view:''}, input name="view")),
-  // we do that for case if we had more than one input for not changing function handleChange.
-
   handleChande = ({ target }) => {
     // console.log(target);
-    console.log(target.value);
+    // console.log(target.value);
     const { name, value } = target;
     this.setState({ [name]: value });
   };
