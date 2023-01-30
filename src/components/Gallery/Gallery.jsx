@@ -7,7 +7,7 @@ import Modal from '../Modal';
 import Loader from '../Loader';
 import Button from '../Button';
 
-import { getGalleryItems } from '../services/galleryApi';
+import { getGalleryItems } from '../../services/galleryApi';
 
 class Gallery extends Component {
   state = {
