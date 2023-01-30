@@ -5,7 +5,7 @@ import css from './imageGallery.module.css';
 const ImageGallery = ({ items, openModal }) => {
   const images = items.map(({ id, tags, webformatURL, largeImageURL }) => (
     <ImageGalleryItem
-      id={id}
+      key={id}
       tags={tags}
       webformatURL={webformatURL}
       openModal={() => openModal(largeImageURL)}
@@ -22,12 +22,5 @@ ImageGallery.defaultProps = {
 
 ImageGallery.propTypes = {
   openModal: PropTypes.func.isRequired,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      tags: PropTypes.string.isRequired,
-      webformatURL: PropTypes.string.isRequired,
-      largeImageURL: PropTypes.string.isRequired,
-    })
-  ),
+  items: PropTypes.array.isRequired,
 };

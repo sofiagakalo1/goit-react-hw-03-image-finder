@@ -10,11 +10,12 @@ const instance = axios.create({
     }
 })
 
-export const getGalleryItems = async(q, _page=1)=>{
+export const getGalleryItems = async(q, page=1, per_page)=>{
     const {data} = await instance.get('/',
     {params:{
         q,
-        _page
+        page,
+        per_page,
     }}
     );
     return data;
